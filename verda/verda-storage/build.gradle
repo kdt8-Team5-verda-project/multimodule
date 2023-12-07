@@ -1,0 +1,38 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'org.example'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    //JPA
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //mysql
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'mysql:mysql-connector-java:8.0.28'
+
+    implementation project(':verda-common')
+}
+
+test {
+    useJUnitPlatform()
+}
